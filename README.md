@@ -13,13 +13,9 @@
 
 ## 🔗 LINKS & OFFICIAL ACCESS
 
-┌──────────────────────────────────────────────────────────────────────────────┐
-│                                                                              │
-│   ■ OFFICIAL STUDIO PORTAL : https://thorneinteractive.github.io/            │
-│   ■ EDITOR LIVE DEMO       : https://thorneinteractive.github.io/THORNE-EDITOR/
-│   ■ GITHUB REPOSITORY      : https://github.com/thorneinteractive/THORNE-EDITOR
-│                                                                              │
-└──────────────────────────────────────────────────────────────────────────────┘
+- **🌐 Official Studio Portal**: [Thorne Interactive](https://thorneinteractive.github.io/)
+- **💻 Editor Live Demo**: [Open Thorne Editor](https://thorneinteractive.github.io/THORNE-EDITOR/)
+- **📂 GitHub Repository**: [thorneinteractive / THORNE-EDITOR](https://github.com/thorneinteractive/THORNE-EDITOR)[cite: 1]
 
 ---
 
