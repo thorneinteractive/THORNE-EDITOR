@@ -11,12 +11,12 @@
 
 ---
 
+
 ## 🔗 LINKS & OFFICIAL ACCESS
 
 - **🌐 Official Studio Portal**: [Thorne Interactive](https://thorneinteractive.github.io/)
 - **💻 Editor Live Demo**: [Open Thorne Editor](https://thorneinteractive.github.io/THORNE-EDITOR/)
 - **📂 GitHub Repository**: [thorneinteractive / THORNE-EDITOR](https://github.com/thorneinteractive/THORNE-EDITOR)[cite: 1]
-
 ---
 
 ## 🏛️ CREATOR & ORIGIN
