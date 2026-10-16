@@ -1,13 +1,25 @@
 # THORNE TEXT EDITOR // AUTEUR SCRIPTWRITER ENGINE
 
-_____ _    _  ____  _____  _   _  ______ 
+```text
+   _____ _    _  ____  _____  _   _  ______ 
   |_   _| |  | |/ __ \|  __ \| \ | ||  ____|
     | | | |__| | |  | | |__) |  \| || |__   
     | | |  __  | |  | |  _  /| . ` ||  __|  
    _| |_| |  | | |__| | | \ \| |\  || |____ 
   |_____|_|  |_|\____/|_|  \_\_| \_||______|
               TEXT EDITOR v1.0
-https://github.com/KacperThorne/thorne-text-editor
+
+---
+
+## 🔗 LINKS & OFFICIAL ACCESS
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│   ■ OFFICIAL STUDIO PORTAL : https://thorneinteractive.github.io/            │
+│   ■ EDITOR LIVE DEMO       : https://thorneinteractive.github.io/THORNE-EDITOR/
+│   ■ GITHUB REPOSITORY      : https://github.com/thorneinteractive/THORNE-EDITOR
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
 
 ---
 
@@ -38,7 +50,7 @@ Thorne Text Editor was developed to address these fundamental challenges:
 Built around an unyielding industrial cyberpunk environment, the interface eliminates unnecessary UI noise, allowing the writer to immerse themselves entirely in worldbuilding, dialogue pacing, and scene composition.
 
 ### 2. Native Screenplay Auto-Flow (Tab & Enter System)
-Writing screenplays requires rapid context switching between scene headings (sluglines), character names, parentheticals, and dialogue lines. This editor features a contextual keyboard navigation system (`Tab` & `Enter` cycle) that automatically predicts and formats the next line without requiring mouse interaction.
+Writing screenplays requires rapid context switching between scene headings (sluglines), character names, parenthetical directions, and dialogue lines. This editor features a contextual keyboard navigation system (`Tab` & `Enter` cycle) that automatically predicts and formats the next line without requiring mouse interaction.
 
 ### 3. Industry Standard Compliance Meets Auteur Aesthetics
 While the editor offers a distinctive dark industrial visual identity with high-contrast color coding for real-time writing clarity, it strictly adheres to the industry-standard **Courier / Courier Prime** typography (12pt layout ratio). When exported or printed to PDF, all color coding converts automatically into clean, black-and-white print-ready pages.
@@ -50,12 +62,21 @@ Your narrative intellectual property remains entirely yours. The editor operates
 
 ## 🛠️ TECHNICAL ARCHITECTURE
 
-* **Core Language**: HTML5, CSS3 (Custom Variables & CSS Grid), Pure Vanilla JavaScript (ES6+ DOM Engine).
-* **Typography**: Industry Standard *Courier Prime* & *Oswald*.
-* **Storage Engine**: Browser-native `LocalStorage` API with 5-second asynchronous Auto-Save.
-* **Layout Mechanics**: Multi-page structured A4 viewport blocks with dynamic pagination counters.
-* **Export Matrix**: Native `.th` JSON file parser, raw text clipboard extraction, and `@media print` PDF compilation engine.
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│   CORE ENGINE  : HTML5 / CSS3 (CUSTOM VARIABLES) / VANILLA JAVASCRIPT ES6+   │
+│   TYPOGRAPHY   : COURIER PRIME (SCREENPLAY MONOSPACE) & OSWALD (UI HEADS)    │
+│   STORAGE      : BROWSER-NATIVE LOCALSTORAGE WITH 5s AUTO-SAVE               │
+│   VIEWPORT     : MULTI-PAGE STRUCTURED A4 RECTANGULAR BLOCK CONTAINERS       │
+│   EXPORTS      : NATIVE .TH (JSON) / RAW TEXT CLIPBOARD / PRINT-TO-PDF       │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
 
 ---
 
-© 2026 THORNE INTERACTIVE. ALL RIGHTS RESERVED.
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│   ALL RIGHTS RESERVED © 2026 THORNE INTERACTIVE                              │
+│   UNAUTHORIZED DUPLICATION IS A VIOLATION OF APPLICABLE LAWS.                │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
