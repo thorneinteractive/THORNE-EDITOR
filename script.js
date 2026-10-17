@@ -6,6 +6,10 @@
   const wordCountEl = document.getElementById('word-count');
   const charCountEl = document.getElementById('char-count');
   const pageCountEl = document.getElementById('page-count');
+  const sceneCountEl = document.getElementById('scene-count');
+  const runtimeEstimateEl = document.getElementById('runtime-estimate');
+  const averageSceneEl = document.getElementById('average-scene');
+  const activeSceneTimeEl = document.getElementById('active-scene-time');
   const saveStatusEl = document.getElementById('save-status');
   const statusDot = document.querySelector('.status-dot');
   const toastEl = document.getElementById('toast');
@@ -19,14 +23,14 @@
   document.addEventListener('DOMContentLoaded', () => {
     loadFromLocalStorage();
     pagesContainer.addEventListener('keydown', handleEditorKeys);
-    pagesContainer.addEventListener('input', e => {
-      normalizePaper(e.target.closest('.editor-paper'));
+    pagesContainer.addEventListener('beforeinput', prepareFirstBlock);
+    pagesContainer.addEventListener('input', () => {
       requestAnimationFrame(paginate);
       updateGlobalStats();
       queueSave();
     });
-    pagesContainer.addEventListener('click', () => setActiveToolbar());
-    pagesContainer.addEventListener('focusin', e => { lastActivePaper = e.target.closest('.editor-paper'); });
+    pagesContainer.addEventListener('click', () => { setActiveToolbar(); updateSceneStats(); });
+    pagesContainer.addEventListener('focusin', e => { lastActivePaper = e.target.closest('.editor-paper'); updateSceneStats(); });
     document.querySelector('.script-toolbar').addEventListener('mousedown', e => {
       if (e.target.closest('.tool-btn[data-format]')) e.preventDefault();
     });
@@ -35,8 +39,12 @@
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') { e.preventDefault(); saveToLocalStorage(); }
       if (e.key === 'Escape' && document.body.classList.contains('focus-mode')) window.toggleFocusMode();
     });
+    document.addEventListener('selectionchange', () => {
+      if (document.activeElement?.closest?.('.editor-paper')) updateSceneStats();
+    });
     updateGlobalStats();
     requestAnimationFrame(paginate);
+    queueSave();
   });
 
   function currentBlock() {
@@ -59,6 +67,37 @@
     range.selectNodeContents(el);
     range.collapse(!atEnd);
     const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+  }
+  function caretOffsetInBlock(block) {
+    const selection = window.getSelection();
+    if (!block || !selection.rangeCount) return null;
+    const range = selection.getRangeAt(0);
+    if (range.startContainer !== block && !block.contains(range.startContainer)) return null;
+    const before = range.cloneRange();
+    before.selectNodeContents(block);
+    before.setEnd(range.startContainer, range.startOffset);
+    return before.toString().length;
+  }
+  function restoreCaretInBlock(block, offset) {
+    if (!block) return;
+    block.focus();
+    const range = document.createRange();
+    let remaining = offset ?? block.innerText.length;
+    const walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT);
+    let node = walker.nextNode();
+    while (node) {
+      if (remaining <= node.textContent.length) {
+        range.setStart(node, remaining);
+        range.collapse(true);
+        const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range);
+        block.scrollIntoView({ block: 'center', inline: 'nearest' });
+        return;
+      }
+      remaining -= node.textContent.length;
+      node = walker.nextNode();
+    }
+    placeCaret(block, true);
+    block.scrollIntoView({ block: 'center', inline: 'nearest' });
   }
   function makeBlock(type, text = '') {
     const el = document.createElement('div');
@@ -99,6 +138,41 @@
       node.setAttribute('data-element', labels['sc-action']);
       openAction = null;
     });
+    repairFragmentedActions(paper);
+  }
+  function repairFragmentedActions(paper) {
+    let fragments = [];
+    const mergeFragments = () => {
+      if (fragments.length >= 3) {
+        const [first, ...rest] = fragments;
+        first.textContent = fragments.map(block => block.innerText).join('');
+        rest.forEach(block => block.remove());
+      }
+      fragments = [];
+    };
+    [...paper.children].forEach(block => {
+      const isSingleCharacterAction = block.classList.contains('sc-action')
+        && block.children.length === 0
+        && block.innerText.trim().length === 1;
+      if (isSingleCharacterAction) fragments.push(block);
+      else mergeFragments();
+    });
+    mergeFragments();
+  }
+  function prepareFirstBlock(e) {
+    const paper = e.target.closest('.editor-paper');
+    if (!paper || currentBlock()) return;
+    const supportedInputs = ['insertText', 'insertCompositionText', 'insertFromPaste', 'insertParagraph', 'insertLineBreak'];
+    if (!supportedInputs.includes(e.inputType)) return;
+    e.preventDefault();
+    const text = e.data ?? e.dataTransfer?.getData('text/plain') ?? '';
+    const lines = e.inputType === 'insertFromPaste' ? text.replace(/\r/g, '').split('\n') : [text];
+    const blocks = lines.map(line => makeBlock('sc-action', line));
+    blocks.forEach(block => paper.append(block));
+    placeCaret(blocks.at(-1), true);
+    updateGlobalStats();
+    queueSave();
+    requestAnimationFrame(paginate);
   }
   function insertAfter(block, type, text = '') {
     const next = makeBlock(type, text);
@@ -121,7 +195,11 @@
         pagesContainer.insertBefore(page, pagesContainer.children[i + 1] || null);
         nextPaper = page.querySelector('.editor-paper');
       }
-      blocks.slice(firstOverflow).reverse().forEach(block => nextPaper.prepend(block));
+      const movedBlocks = blocks.slice(firstOverflow);
+      const activeBlock = currentBlock();
+      const caretOffset = caretOffsetInBlock(activeBlock);
+      movedBlocks.reverse().forEach(block => nextPaper.prepend(block));
+      if (activeBlock && movedBlocks.includes(activeBlock)) restoreCaretInBlock(activeBlock, caretOffset);
       requestAnimationFrame(paginate);
       return;
     }
@@ -151,7 +229,6 @@
   function handleEditorKeys(e) {
     const paper = e.target.closest('.editor-paper');
     if (!paper) return;
-    normalizePaper(paper);
     if (e.key === 'Tab') {
       e.preventDefault();
       const block = currentBlock();
@@ -206,7 +283,54 @@
     wordCountEl.textContent = `WORDS: ${words}`;
     charCountEl.textContent = `CHARACTERS: ${fullText.length}`;
     pageCountEl.textContent = `PAGES: ${papers.length}`;
+    updateSceneStats();
     saveStatusEl.textContent = '// UNSAVED CHANGES'; statusDot.classList.add('saving');
+  }
+  function estimatedBlockLines(block) {
+    if (!block.innerText.trim()) return 0;
+    const style = window.getComputedStyle(block);
+    const lineHeight = parseFloat(style.lineHeight);
+    const margins = parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+    if (Number.isFinite(lineHeight) && lineHeight > 0) {
+      return Math.max(1, Math.ceil((block.offsetHeight + margins) / lineHeight));
+    }
+    return Math.max(1, Math.ceil(block.innerText.trim().split(/\s+/).length / 12));
+  }
+  function screenplayScenes() {
+    const blocks = [...pagesContainer.querySelectorAll('.editor-paper')].flatMap(paper => [...paper.children]);
+    const scenes = [];
+    let scene = null;
+    blocks.forEach(block => {
+      if (block.classList.contains('sc-slugline')) {
+        if (scene?.blocks.length) scenes.push(scene);
+        scene = { heading: block.innerText.trim() || 'UNTITLED SCENE', blocks: [] };
+      }
+      if (!scene) scene = { heading: 'OPENING', blocks: [] };
+      scene.blocks.push(block);
+    });
+    if (scene?.blocks.some(block => block.innerText.trim())) scenes.push(scene);
+    return scenes.map((item, index) => {
+      const lines = item.blocks.reduce((total, block) => total + estimatedBlockLines(block), 0);
+      return { ...item, index: index + 1, seconds: Math.max(15, Math.round((lines / 55) * 60 / 5) * 5) };
+    });
+  }
+  function formatDuration(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainder = seconds % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(remainder).padStart(2, '0')}`;
+  }
+  function updateSceneStats() {
+    const scenes = screenplayScenes();
+    const totalSeconds = scenes.reduce((total, scene) => total + scene.seconds, 0);
+    const activeBlock = currentBlock();
+    const activeScene = scenes.find(scene => activeBlock && scene.blocks.includes(activeBlock));
+    sceneCountEl.textContent = `SCENES: ${scenes.length}`;
+    runtimeEstimateEl.textContent = `EST. RUN TIME: ${formatDuration(totalSeconds)}`;
+    averageSceneEl.textContent = `AVG. SCENE: ${formatDuration(scenes.length ? Math.round(totalSeconds / scenes.length) : 0)}`;
+    activeSceneTimeEl.textContent = activeScene ? `SCENE ${activeScene.index}: ~${formatDuration(activeScene.seconds)}` : 'SCENE: --:--';
+    activeSceneTimeEl.parentElement.title = activeScene
+      ? `${activeScene.heading} — estimated from formatted script length.`
+      : 'Estimated from the formatted script length. One screenplay page is roughly one minute.';
   }
   function queueSave() { clearTimeout(saveTimer); saveTimer = setTimeout(() => saveToLocalStorage(true), 700); }
   window.toggleTheme = function() {

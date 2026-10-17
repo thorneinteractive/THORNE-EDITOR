@@ -124,8 +124,9 @@ body.focus-mode .app-header {
 .status-dot { width: 7px; height: 7px; background: var(--color-red-main); border-radius: 50%; box-shadow: 0 0 8px var(--color-red-main); }
 
 /* TOOLBAR */
-.script-toolbar { display: flex; justify-content: space-between; padding: 8px 20px; background: var(--bg-header); border-top: 1px solid rgba(128,128,128,0.1); }
+.script-toolbar { display: flex; align-items: center; gap: 12px; padding: 8px 20px; background: var(--bg-header); border-top: 1px solid rgba(128,128,128,0.1); }
 .tool-group { display: flex; gap: 6px; }
+.utils { margin-left: auto; }
 
 .tool-btn {
     background: var(--bg-primary); border: 1px solid var(--color-red-main);
@@ -134,6 +135,11 @@ body.focus-mode .app-header {
 }
 .tool-btn:hover { background: var(--color-red-main); color: #fff; font-weight: bold; }
 .tool-btn.active { background: var(--color-red-main); color: #fff; box-shadow: 0 0 10px var(--color-red-glow); }
+.scene-timer {
+    display: flex; align-items: center; gap: 7px; min-width: 138px; padding: 6px 10px;
+    border: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.7rem; white-space: nowrap;
+}
+.scene-timer i { color: var(--color-slugline); }
 
 /* MULTI-PAGE VIEWPORT & RECTANGLES */
 .editor-viewport {
@@ -194,7 +200,7 @@ body.focus-mode .app-header {
     background: var(--bg-header); border-top: 1px solid var(--border-color);
     padding: 8px 20px; display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--text-muted);
 }
-.footer-status { display: flex; gap: 20px; }
+.footer-status { display: flex; flex-wrap: wrap; gap: 8px 20px; }
 
 /* PRINT STYLES */
 @media print {
@@ -215,6 +221,7 @@ body.focus-mode .app-header {
     .doc-menubar { flex-wrap: wrap; gap: 9px; }
     .script-toolbar { flex-wrap: wrap; gap: 8px; padding: 8px 12px; }
     .tool-group { flex-wrap: wrap; }
+    .utils { margin-left: 0; }
     .editor-viewport { padding: 18px 10px; }
     .script-page { width: min(816px, calc(100vw - 20px)); min-height: 0; padding: 9vh 9vw 9vh 12vw; }
     .editor-paper { height: 75vh; }
