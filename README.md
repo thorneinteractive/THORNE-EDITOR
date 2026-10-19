@@ -1,4 +1,4 @@
-# THORNE TEXT EDITOR // AUTEUR SCRIPTWRITER ENGINE
+# THORNE TEXT EDITOR WEB EDITION // AUTEUR SCRIPTWRITER ENGINE
 
 ```text
    _____ _    _  ____  _____  _   _  ______ 
