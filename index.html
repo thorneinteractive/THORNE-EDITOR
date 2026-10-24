@@ -1,103 +1,309 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THORNE TEXT EDITOR // SCREENPLAY WRITER</title>
-    <meta name="description" content="Thorne Text Editor — Professional screenplay editor with auto-flow and page separation.">
+    <title>THORNE INTERACTIVE // OFFICIAL AUTEUR STUDIO - HOME</title>
+    <meta name="description" content="Thorne Interactive - Niezależne autorskie studio gier. Unreal Engine 5, C++, bezkompromisowy realizm i niezależność.">
     <meta name="theme-color" content="#030303">
     <link rel="icon" href="Obrazy/logo.jpg">
+    <script>document.documentElement.classList.add('js');</script>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,400&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
 </head>
-<body data-theme="dark">
+<body data-theme="dark" data-page="home" id="top">
+    <script>try{if(sessionStorage.getItem('thorne-page-transition')==='1'){document.body.classList.add('page-arrival');sessionStorage.removeItem('thorne-page-transition');}}catch{}</script>
+    <div class="page-transition" aria-hidden="true"><span></span></div>
 
-    <!-- APP HEADER -->
-    <header class="app-header">
-        <div class="header-top">
+    <a href="#content" class="skip-link" data-i18n="skip_link">PRZEJDŹ DO TREŚCI</a>
+    <div class="scroll-progress-container">
+        <div class="scroll-progress" id="scroll-progress"></div>
+        <div class="scroll-progress-text" id="scroll-progress-text">0%</div>
+    </div>
+
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+    <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+    <div class="scanlines-overlay"></div>
+    <div class="vignette-overlay"></div>
+    <div class="crt-noise"></div>
+
+    <header class="site-header" id="top-header">
+        <div class="header-container">
             <div class="logo-group">
-                <span class="logo-mark">TE</span>
-                <div class="doc-meta">
-                    <input type="text" id="document-title" class="doc-title-input" value="Untitled_Script.th" placeholder="Document title...">
-                    <div class="doc-menubar">
-                        <button type="button" class="menu-item" onclick="createNewDoc()"><i class="fa-solid fa-file-circle-plus"></i> New</button>
-                        <button type="button" class="menu-item" onclick="saveToLocalStorage()"><i class="fa-solid fa-floppy-disk"></i> Save</button>
-                        <button type="button" class="menu-item" onclick="downloadFile()"><i class="fa-solid fa-download"></i> Export (.th)</button>
-                        <label class="menu-item file-upload-btn">
-                            <i class="fa-solid fa-folder-open"></i> Open
-                            <input type="file" id="file-input" accept=".th,.json,.txt" onchange="loadFile(event)">
-                        </label>
-                        <button type="button" class="menu-item alert-item" onclick="window.print()"><i class="fa-solid fa-print"></i> Print / PDF</button>
-                        <button type="button" class="menu-item alert-item" onclick="clearDoc()"><i class="fa-solid fa-trash"></i> Clear</button>
-                    </div>
+                <a href="index.html" class="logo-link" aria-label="Thorne Interactive">
+                    <span class="logo-mark">TI</span>
+                </a>
+                <div class="studio-identifier">
+                    <span class="studio-name">THORNE INTERACTIVE</span>
+                    <span class="sys-status"><span class="status-dot"></span> // SYS_ACTIVE_OK</span>
                 </div>
             </div>
 
-            <div class="header-right-tools">
-                <button type="button" class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode"><i class="fa-solid fa-circle-half-stroke" id="theme-icon"></i> <span id="theme-label">DARK</span></button>
-                <div class="sys-status">
-                    <span class="status-dot"></span>
-                    <span id="save-status">// AUTO_SAVE: ACTIVE</span>
-                </div>
-            </div>
-        </div>
+            <nav class="desktop-nav">
+                <a href="index.html" class="nav-item is-active" data-nav="home" data-i18n="nav_home">[00. HOME]</a>
+                <a href="#about" class="nav-item" data-nav="about" data-i18n="nav_studio">[01. STUDIO]</a>
+                <a href="games.html" class="nav-item" data-nav="games" data-i18n="nav_games">[02. GAMES]</a>
+                <a href="#manifesto" class="nav-item" data-nav="manifesto" data-i18n="nav_manifest">[03. MANIFEST]</a>
+                <a href="#lore" class="nav-item" data-nav="lore" data-i18n="nav_lore">[04. LORE]</a>
+                <a href="#tech" class="nav-item" data-nav="tech" data-i18n="nav_tech">[05. TECH_STACK]</a>
+            </nav>
 
-        <!-- SCREENPLAY FORMATTING TOOLBAR -->
-        <div class="script-toolbar">
-            <div class="tool-group">
-                <button type="button" class="tool-btn btn-red" data-format="sc-slugline" onclick="applyFormat('slugline')" title="Tab: change the current element"><i class="fa-solid fa-video"></i> SCENE</button>
-                <button type="button" class="tool-btn btn-red" data-format="sc-action" onclick="applyFormat('action')"><i class="fa-solid fa-align-left"></i> ACTION</button>
-                <button type="button" class="tool-btn btn-red" data-format="sc-character" onclick="applyFormat('character')"><i class="fa-solid fa-user"></i> CHARACTER</button>
-                <button type="button" class="tool-btn btn-red" data-format="sc-parenthetical" onclick="applyFormat('parenthetical')"><i class="fa-solid fa-brackets-round"></i> PARENTHETICAL</button>
-                <button type="button" class="tool-btn btn-red" data-format="sc-dialogue" onclick="applyFormat('dialogue')"><i class="fa-solid fa-comment-dots"></i> DIALOGUE</button>
-                <button type="button" class="tool-btn btn-red" data-format="sc-transition" onclick="applyFormat('transition')"><i class="fa-solid fa-arrow-right"></i> TRANSITION</button>
-                <button type="button" class="tool-btn btn-red" data-format="sc-shot" onclick="applyFormat('shot')"><i class="fa-solid fa-camera"></i> SHOT</button>
-            </div>
-
-            <div class="tool-group utils">
-                <button type="button" class="tool-btn btn-red" onclick="addNewPage()" title="Insert New Page Rect"><i class="fa-solid fa-file-lines"></i> + PAGE</button>
-                <button type="button" class="tool-btn btn-red" onclick="copyToClipboard()" title="Copy Script"><i class="fa-solid fa-copy"></i> COPY</button>
-                <button type="button" class="tool-btn btn-red" onclick="toggleFocusMode()" title="Focus Mode"><i class="fa-solid fa-expand"></i> FOCUS</button>
-            </div>
-            <div class="scene-timer" title="Estimated from the formatted script length. One screenplay page is roughly one minute." aria-live="polite">
-                <i class="fa-regular fa-clock"></i>
-                <span id="active-scene-time">SCENE: --:--</span>
+            <div class="header-tools">
+                <button id="language-toggle-btn" class="lang-switch-btn" type="button" aria-label="Toggle Language">
+                    <span class="lang-indicator">EN</span> / <span class="lang-muted">PL</span>
+                </button>
+                <button id="hamburger-btn" class="hamburger-menu" type="button" aria-label="Open Menu" aria-expanded="false" aria-controls="mobile-overlay">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- MULTI-PAGE VIEWPORT -->
-    <main class="editor-viewport" id="viewport">
-        <div class="pages-container" id="pages-container">
-            <!-- Page 1 -->
-            <div class="script-page" data-page-number="1">
-                <div class="page-header-label">// PAGE 01</div>
-                <div class="editor-paper" contenteditable="true" spellcheck="false" data-placeholder="Press TAB or click a formatting button to start your screenplay..."></div>
+    <div class="mobile-menu-overlay" id="mobile-overlay">
+        <div class="mobile-menu-content">
+            <nav class="mobile-nav-links">
+                <a href="index.html" class="mobile-link" data-i18n="nav_home">00. HOME</a>
+                <a href="#about" class="mobile-link" data-i18n="mobile_studio">01. STUDIO</a>
+                <a href="games.html" class="mobile-link" data-i18n="mobile_games">02. GAMES</a>
+                <a href="#manifesto" class="mobile-link" data-i18n="mobile_manifest">03. MANIFEST</a>
+                <a href="#lore" class="mobile-link" data-i18n="mobile_lore">04. LORE</a>
+                <a href="#tech" class="mobile-link" data-i18n="mobile_tech">05. TECH_STACK</a>
+            </nav>
+        </div>
+    </div>
+
+    <main id="content">
+        <!-- HERO SECTION -->
+        <section id="hero" class="hero-section">
+            <div class="hero-absolute-bg-banner" aria-hidden="true">
+                <img src="Obrazy/baner do odliczania.jpg" alt="" id="hero-parallax-bg" class="hero-bg-image-element">
+                <div class="hero-bg-vignette-mask"></div>
+            </div>
+            <div class="hero-dark-mask"></div>
+            <span class="hud-corner tl"></span><span class="hud-corner tr"></span>
+            <span class="hud-corner bl"></span><span class="hud-corner br"></span>
+            <span class="hud-readout left">// STUDIO_CORE // AUTEUR_VISION</span>
+            <span class="hud-readout right">// BUILD: UNREAL ENGINE 5.4 // C++</span>
+
+            <div class="hero-content-container">
+                <div class="terminal-tagline">
+                    <span class="blink-cursor">&gt;</span> <span data-i18n="hero_tagline">NIEZALEŻNE AUTORSKIE STUDIO GIER // POLSKA</span>
+                </div>
+                <h1 class="main-title glitch-effect" data-text="THORNE INTERACTIVE">THORNE INTERACTIVE</h1>
+                <p class="hero-subtitle" data-i18n="hero_sub">Wkraczamy w przestrzeń, gdzie czysta technologia C++ spotyka się z bezkompromisowym, egzystencjalnym storytellingiem i surową estetyką industrialną.</p>
+
+                <div class="countdown-terminal-box">
+                    <div class="countdown-header">
+                        <i class="fa-solid fa-clock"></i> <span data-i18n="cd_title">SYSTEM TIMER // CEL: PREMIERA FLAGOWEGO PROJEKTU (ZIMA 2028)</span>
+                    </div>
+                    <div class="countdown-grid" id="countdown-timer">
+                        <div class="cd-item"><span id="cd-years" class="cd-val">00</span><span class="cd-lbl" data-i18n="cd_years">LATA</span></div>
+                        <div class="cd-sep">:</div>
+                        <div class="cd-item"><span id="cd-months" class="cd-val">00</span><span class="cd-lbl" data-i18n="cd_months">MIESIĄCE</span></div>
+                        <div class="cd-sep">:</div>
+                        <div class="cd-item"><span id="cd-days" class="cd-val">00</span><span class="cd-lbl" data-i18n="cd_days">DNI</span></div>
+                        <div class="cd-sep">:</div>
+                        <div class="cd-item"><span id="cd-hours" class="cd-val">00</span><span class="cd-lbl" data-i18n="cd_hours">GODZINY</span></div>
+                        <div class="cd-sep">:</div>
+                        <div class="cd-item"><span id="cd-minutes" class="cd-val">00</span><span class="cd-lbl" data-i18n="cd_minutes">MINUTY</span></div>
+                        <div class="cd-sep">:</div>
+                        <div class="cd-item"><span id="cd-seconds" class="cd-val">00</span><span class="cd-lbl" data-i18n="cd_seconds">SEKUNDY</span></div>
+                    </div>
+                    <div class="cd-progress">
+                        <div class="cd-progress-meta">
+                            <span data-i18n="cd_progress">CZAS OD STARTU STUDIA // NIE POSTĘP GRY</span>
+                            <b id="cd-progress-val" aria-live="polite">DATA STARTU NIEPODANA</b>
+                        </div>
+                       
+                    </div>
+                </div>
+
+                <div class="hero-cta-group">
+                    <a href="godkiller.html" class="btn-brutalist" data-i18n="btn_explore">SPRAWDŹ GRĘ // GODKILLER</a>
+                    <a href="#about" class="btn-brutalist-outline" data-i18n="btn_studio_manifesto">POZNAJ FILOZOFIĘ STUDIO</a>
+                </div>
+            </div>
+            <div class="scroll-down-indicator">
+                <span data-i18n="scroll_down">SCROLL // ODKRYJ TOŻSAMOŚĆ</span>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- TICKER STRIP -->
+        <div class="ticker-strip" aria-hidden="true">
+            <div class="ticker-track">
+                <div class="ticker-group">
+                    <span>THORNE INTERACTIVE</span><span class="sep">//</span>
+                    <span>AUTORSHIP OVER CORPORATIONS</span><span class="sep">//</span>
+                    <span>UNREAL ENGINE 5</span><span class="sep">//</span>
+                    <span>PURE C++ CORE</span><span class="sep">//</span>
+                    <span>UNCOMPROMISING VISION</span><span class="sep">//</span>
+                    <span>POLAND INDIE</span><span class="sep">//</span>
+                    <span>ITCH.IO READY</span><span class="sep">//</span>
+                </div>
+                <div class="ticker-group">
+                    <span>THORNE INTERACTIVE</span><span class="sep">//</span>
+                    <span>AUTORSHIP OVER CORPORATIONS</span><span class="sep">//</span>
+                    <span>UNREAL ENGINE 5</span><span class="sep">//</span>
+                    <span>PURE C++ CORE</span><span class="sep">//</span>
+                    <span>UNCOMPROMISING VISION</span><span class="sep">//</span>
+                    <span>POLAND INDIE</span><span class="sep">//</span>
+                    <span>ITCH.IO READY</span><span class="sep">//</span>
+                </div>
             </div>
         </div>
+
+        <!-- SEKCJA 01: O STUDIU -->
+        <section id="about" class="section-block">
+            <div class="container" style="max-width: 1300px; margin: 0 auto;">
+                <div class="section-heading reveal">
+                    <span class="sec-number">01 //</span>
+                    <h2 data-i18n="about_heading">FILOZOFIA I TOŻSAMOŚĆ STUDIA</h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-text-col reveal">
+                        <h3 class="brutalist-subheading" data-i18n="about_subhead">NIE JESTEŚMY KORPORACJĄ. JESTEŚMY AUTORAMI.</h3>
+                        <p class="text-body" data-i18n="about_p1">
+                            Thorne Interactive powstaje z buntu przeciwko sterylnej, wykalkulowanej masowej produkcyjności współczesnego gamedevu. Skupiamy się na tworzeniu doświadczeń dla dojrzałego odbiorcy, w których mechanika gry ściśle współgra z ciężką, egzystencjalną narracją.
+                        </p>
+                        <p class="text-body" data-i18n="about_p2">
+                            Nasze projekty budowane są na zaawansowanym silniku Unreal Engine 5 przy użyciu czystego kodu C++ przez zespół pasjonatów w Polsce. Nie idziemy na skróty, nie stosujemy sztucznej cenzury i nie uginamy się pod trendami rynkowymi.
+                        </p>
+                        <p class="text-body">
+                            Każdy asset, każda linijka kodu oraz każda nuta ścieżki dźwiękowej są dokładnie przemyślane, tworząc spójne dzieło autorskie od graczy dla graczy.
+                        </p>
+                    </div>
+                    <div class="about-stats-col">
+                        <div class="stat-card tilt reveal" style="--d:.05s">
+                            <span class="stat-num">C++</span>
+                            <span class="stat-label" data-i18n="stat_1">CZYSTY KOD ŹRÓDŁOWY I OPTYMALIZACJA</span>
+                        </div>
+                        <div class="stat-card tilt reveal" style="--d:.15s">
+                            <span class="stat-num">UE5</span>
+                            <span class="stat-label" data-i18n="stat_2">LUMEN, NANITE I ZAAWANSOWANA FIZYKA</span>
+                        </div>
+                        <div class="stat-card tilt reveal" style="--d:.25s">
+                            <span class="stat-num" data-count="100" data-suffix="%">100%</span>
+                            <span class="stat-label" data-i18n="stat_3">NIEZALEŻNA WIZJA AUTORSKA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEKCJA 02: MANIFEST -->
+        <section id="manifesto" class="section-block border-top">
+            <div class="container" style="max-width: 1300px; margin: 0 auto;">
+                <div class="section-heading reveal">
+                    <span class="sec-number">02 //</span>
+                    <h2>MANIFEST AUTORSKI</h2>
+                </div>
+                <div class="manifesto reveal">
+                    <div class="manifesto-row">
+                        <span class="manifesto-text" data-i18n="man_1">NIE IDZIEMY NA SKRÓTY.</span>
+                        <span class="manifesto-idx">// A.01</span>
+                    </div>
+                    <div class="manifesto-row">
+                        <span class="manifesto-text" data-i18n="man_2">BEZ SZTUCZNEJ CENZURY.</span>
+                        <span class="manifesto-idx">// A.02</span>
+                    </div>
+                    <div class="manifesto-row">
+                        <span class="manifesto-text" data-i18n="man_3">NIE UGINAMY SIĘ POD TRENDAMI.</span>
+                        <span class="manifesto-idx">// A.03</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEKCJA 03: LORE & ŚWIAT -->
+        <section id="lore" class="section-block border-top">
+            <div class="container" style="max-width: 1300px; margin: 0 auto;">
+                <div class="section-heading reveal">
+                    <span class="sec-number">03 //</span>
+                    <h2>KODOWANIE RZECZYWISTOŚCI // LORE UNIWERSUM</h2>
+                </div>
+                <div class="about-grid">
+                    <div class="reveal">
+                        <h3 class="brutalist-subheading">UPADEK CENTRALNYCH SERWERÓW</h3>
+                        <p class="text-body">
+                            W świecie gry cywilizacja, jaką znaliśmy, przestała istnieć po tzw. Wielkim Odcięciu w 2042 roku. Sztuczna inteligencja przejęła kontrolę nad infrastrukturą krytyczną, tworząc autorytarny system nadzoru znany jako sieć Velen.
+                        </p>
+                        <p class="text-body">
+                            Ludzkość schodzi do podziemia, a nielicznym udaje się zachować wolną wolę dzięki analogowym modyfikacjom neurologicznym. Kael Cross staje się symbolem oporu wobec algorytmów decydujących o życiu i śmierci jednostek.
+                        </p>
+                    </div>
+                    <div class="reveal" style="--d:.1s">
+                        <div class="stat-card">
+                            <span class="stat-num">2042</span>
+                            <span class="stat-label">ROK WIELKIEGO ODCIĘCIA SYSTEMU</span>
+                        </div>
+                        <div class="stat-card" style="margin-top: 20px;">
+                            <span class="stat-num">3 SEKTORY</span>
+                            <span class="stat-label">PODZIAŁ SPOŁECZNY NEW STATE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEKCJA 04: STOS TECHNOLOGICZNY -->
+        <section id="tech" class="section-block border-top">
+            <div class="container" style="max-width: 1300px; margin: 0 auto;">
+                <div class="section-heading reveal">
+                    <span class="sec-number">04 //</span>
+                    <h2>STOS TECHNOLOGICZNY I ARCHITEKTURA C++</h2>
+                </div>
+                <p class="text-body reveal" style="max-width: 800px; margin-bottom: 40px;">
+                    Budujemy własne systemy gameplayowe w oparciu o optymalizowany kod natywny C++ w Unreal Engine 5. Pozwala nam to osiągnąć bezkompromisową płynność oraz unikalną fizykę walki bez zbędnego narzutu wydajnościowego Blueprintów.
+                </p>
+                <div class="pillars-grid">
+                    <div class="pillar-card tilt reveal" data-idx="T1">
+                        <i class="fa-solid fa-microchip pillar-icon"></i>
+                        <h4 class="pillar-title">NATIVE C++</h4>
+                        <p class="pillar-desc">Wydajne zarządzanie pamięcią i autorskie komponenty SI.</p>
+                    </div>
+                    <div class="pillar-card tilt reveal" data-idx="T2" style="--d:.1s">
+                        <i class="fa-solid fa-lightbulb pillar-icon"></i>
+                        <h4 class="pillar-title">LUMEN & NANITE</h4>
+                        <p class="pillar-desc">Dynamiczne oświetlenie globalne i nieskończona szczegółowość geometrii.</p>
+                    </div>
+                    <div class="pillar-card tilt reveal" data-idx="T3" style="--d:.2s">
+                        <i class="fa-solid fa-network-wired pillar-icon"></i>
+                        <h4 class="pillar-title">CHAOS PHYSICS</h4>
+                        <p class="pillar-desc">Realistyczna destrukcja otoczenia i kolizje kinetyczne.</p>
+                    </div>
+                    <div class="pillar-card tilt reveal" data-idx="T4" style="--d:.3s">
+                        <i class="fa-solid fa-terminal pillar-icon"></i>
+                        <h4 class="pillar-title">LINUX & PROTON</h4>
+                        <p class="pillar-desc">Pełne wsparcie dla graczy korzystających z otwartych systemów operacyjnych.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 80px; text-align: center;" class="reveal">
+                    <a href="godkiller.html" class="btn-brutalist" style="font-size: 1rem; padding: 18px 45px;">PRZEJDŹ DO PROJEKTU GODKILLER // GAMES</a>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="toast-notification"></div>
-
-    <!-- FOOTER -->                                                                                                                                         
-    <footer class="app-footer">
-        <div class="footer-status">
-            <span id="word-count">WORDS: 0</span>
-            <span id="char-count">CHARACTERS: 0</span>
-            <span id="page-count">PAGES: 1</span>
-            <span id="scene-count">SCENES: 0</span>
-            <span id="runtime-estimate">EST. RUN TIME: 00:00</span>
-            <span id="average-scene">AVG. SCENE: 00:00</span>
-        </div>
-        <div class="footer-copyright">
-            &copy; 2026 THORNE INTERACTIVE. ALL RIGHTS RESERVED.
+    <footer class="site-footer">
+        <div class="container footer-flex" style="max-width: 1300px; margin: 0 auto;">
+            <p data-i18n="footer_rights">&copy; 2026 THORNE INTERACTIVE. WSZELKIE PRAWA ZASTRZEŻONE.</p>
+            <nav class="footer-nav">
+                <a href="index.html">HOME</a>
+                <a href="games.html">GAMES</a>
+            </nav>
+            <p class="footer-sys-info">// ARCHITECTURE: UE5_C++ // HUB_ACTIVE</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to top">&uarr;</a>
+    <script src="roadmap-content.js" defer></script>
+    <script src="script.js" defer></script>
+    <script src="progress.js" defer></script>
 </body>
 </html>
+

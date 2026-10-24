@@ -1,76 +1,113 @@
-# THORNE TEXT EDITOR WEB EDITION // AUTEUR SCRIPTWRITER ENGINE
+# THORNE INTERACTIVE // OFFICIAL WEB HUB
 
-```text
-   _____ _    _  ____  _____  _   _  ______ 
-  |_   _| |  | |/ __ \|  __ \| \ | ||  ____|
-    | | | |__| | |  | | |__) |  \| || |__   
-    | | |  __  | |  | |  _  /| . ` ||  __|  
-   _| |_| |  | | |__| | | \ \| |\  || |____ 
-  |_____|_|  |_|\____/|_|  \_\_| \_||______|
-              TEXT EDITOR v1.0
-``` 
+<div align="center">
 
-## 🔗 LINKS & OFFICIAL ACCESS
+**INDEPENDENT AUTEUR GAME STUDIO // UNCOMPROMISING REALISM**
 
-- **🌐 Official Studio Portal**: [Thorne Interactive](https://thorneinteractive.github.io/)
-- **💻 Editor Live Demo**: [Open Thorne Editor](https://thorneinteractive.github.io/THORNE-EDITOR/)
-- **📂 GitHub Repository**: [thorneinteractive / THORNE-EDITOR](https://github.com/thorneinteractive/THORNE-EDITOR)[cite: 1]
----
+[![Status](https://img.shields.io/badge/STATUS-PRE--ALPHA-111111?style=for-the-badge&logoColor=white&color=000000)](https://thorneinteractive.github.io/thorne-interactive/)
+[![Engine](https://img.shields.io/badge/ENGINE-UNREAL_ENGINE_5-111111?style=for-the-badge&logoColor=white&color=000000)](https://unrealengine.com/)
+[![Localization](https://img.shields.io/badge/LANG-PL%2FEN_AUTO-111111?style=for-the-badge&logoColor=white&color=000000)](https://thorneinteractive.github.io/thorne-interactive/)
+[![License](https://img.shields.io/badge/LICENSE-ALL_RIGHTS_RESERVED-darkred?style=for-the-badge)](https://thorneinteractive.github.io/thorne-interactive/)
 
-## 🏛️ CREATOR & ORIGIN
+🌐 **Live Website:** [https://thorneinteractive.github.io/thorne-interactive/](https://thorneinteractive.github.io/thorne-interactive/)
 
-**Thorne Text Editor** is an independent, specialized digital screenplay workspace created by **Thorne Interactive** — an auteur indie game studio based in Poland. 
-
-Designed specifically to align with the raw, industrial, and cyber-dystopian aesthetic of the studio's primary open-world project (*Godkiller*), this editor stands as a dedicated software tool built to streamline narrative design, dialogue writing, and worldbuilding across game development pipelines.
+</div>
 
 ---
 
-## 🎯 PURPOSE & AUDIENCE
+## 🇵🇱 POLSKI // DOKUMENTACJA PROJEKTU
 
-This software is designed specifically for:
-* **Narrative Designers & Game Writers**: Crafting non-linear branching scripts, character dialogues, and environmental lore for indie and AAA video games.
-* **Auteur Screenwriters & Filmmakers**: Writing standard motion picture screenplays adhering to traditional Hollywood page-formatting rules.
-* **Creative Directors & Worldbuilders**: Maintaining unified universe bibles, quest documentation, and scene structures without corporate bloated software.
+### 1. O Studio & Filozofii
+**Thorne Interactive** to niezależne, autorskie studio gier wideo powstałe w Polsce. Naszą misją jest przełamywanie utartych schematów branżowych poprzez tworzenie produkcji dla dojrzałego, wymagającego odbiorcy. Projektujemy gry, w których bezkompromisowa, surowa mechanika rozgrywki oraz wysoki poziom wyzwania ściśle łączą się z mroczną, egzystencjalną narracją.
 
----
+### 2. Projekt GODKILLER
+**GODKILLER** to flagowy projekt studia. Jest to mroczna gra akcji w otwartym świecie osadzona w dystopicznym uniwersum stanu **New State (NS)** wzorowanego na Nowym Jorku i Manhattanie po wojnach z AI.
 
-## 💡 WHY WE USE & CREATED THIS EDITOR
+* **🌍 Struktura Świata (3 Dzielnice):**
+  * **Rusty Lands:** Złomowisko, przemysłowa strefa pełna wraków maszyn z czasów wojny z AI, rdzy i pyłu.
+  * **Lowtown:** Szare osiedla z wielkiej płyty, surowy beton i gęsta sieć chodników dla NPC.
+  * **Vanguard:** Sterylne, elitarne szklane wieżowce (siedziba Velena; postacie takie jak Kael nie mają tu wstępu z powodu braku sektorowej wizy).
+* **👤 Główny Bohater / Fabuła:** Wcielasz się w Kaela Crossa w mrocznym świecie, gdzie technologiczne klany walczą o dominację.
 
-Modern screenplay and writing tools are often clogged with subscription models, heavy server dependencies, intrusive cloud synchronization, or overly sterile interfaces that disrupt creative focus. 
+* **Silnik:** Unreal Engine 5 (C++ Core + Enhanced Input, optymalizacja Lumen i Nanite)
+* **Platformy docelowe:** PC (Windows 10/11 / Linux przez Proton & Native)
+* **Dystrybucja:** itch.io (brak kosztów wstępnych i pełna niezależność)
+* **Status:** Pre-Alpha / pierwsze systemy gameplayu w C++ (Q1)
+* **Planowana Premiera:** Zima 2028
 
-Thorne Text Editor was developed to address these fundamental challenges:
+### 3. Mapa Drogowa
+* **Etap koncepcyjny (fundamenty):** Zarys uniwersum New State, konfliktu człowiek–AI, postaci Kaela Crossa i trzech sektorów. To baza fabularna, która będzie rozwijana podczas produkcji.
+* **Q4 (ukończone):** Start prac z C++ i konfiguracja Unreal Engine 5.
+* **Q1 (obecny etap):** Podstawy sterowania i Enhanced Input są ukończone; w toku są ruch postaci i pierwsza testowa klasa rozgrywki. Projekt pozostaje na bardzo wczesnym etapie; nie publikujemy procentowego wskaźnika ukończenia.
+* **Q2 (0%, planowane):** Prototyp wykrywania trafień, kolizji i podstaw systemu walki.
+* **Q3 (0%, planowane):** Pierwsze blokouty lokacji oraz testy materiałów i oświetlenia.
+* **Q4 (0%, planowane):** System zadań i wyborów fabularnych.
+* **Q1 (0%, planowane):** Podstawowe zachowania NPC i reakcje frakcji.
+* **Q2 (0%, planowane):** Audio, klimat i integracja zawartości.
+* **Q3 (0%, planowane):** Playable Teaser, QA i testy Linux, jeśli prototyp będzie gotowy.
+* **Q4 (0%, planowane):** Kandydat do wydania, stabilizacja i przygotowanie strony produktu.
+* **Zima 2028 (cel orientacyjny):** Premiera GODKILLER na PC / itch.io. Termin nie jest gwarantowany; priorytetem pozostają jakość i stabilność.
 
-### 1. Zero Distractions & Pure Focus
-Built around an unyielding industrial cyberpunk environment, the interface eliminates unnecessary UI noise, allowing the writer to immerse themselves entirely in worldbuilding, dialogue pacing, and scene composition.
-
-### 2. Native Screenplay Auto-Flow (Tab & Enter System)
-Writing screenplays requires rapid context switching between scene headings (sluglines), character names, parenthetical directions, and dialogue lines. This editor features a contextual keyboard navigation system (`Tab` & `Enter` cycle) that automatically predicts and formats the next line without requiring mouse interaction.
-
-### 3. Industry Standard Compliance Meets Auteur Aesthetics
-While the editor offers a distinctive dark industrial visual identity with high-contrast color coding for real-time writing clarity, it strictly adheres to the industry-standard **Courier / Courier Prime** typography (12pt layout ratio). When exported or printed to PDF, all color coding converts automatically into clean, black-and-white print-ready pages.
-
-### 4. Complete Data Sovereignty & Offline Safety
-Your narrative intellectual property remains entirely yours. The editor operates locally within your browser using persistent LocalStorage and raw `.th` JSON script structures, ensuring zero unauthorized cloud exposure, tracking, or data harvesting.
-
----
-
-## 🛠️ TECHNICAL ARCHITECTURE
-
-┌──────────────────────────────────────────────────────────────────────────────┐
-│                                                                              │
-│   CORE ENGINE  : HTML5 / CSS3 (CUSTOM VARIABLES) / VANILLA JAVASCRIPT ES6+   │
-│   TYPOGRAPHY   : COURIER PRIME (SCREENPLAY MONOSPACE) & OSWALD (UI HEADS)    │
-│   STORAGE      : BROWSER-NATIVE LOCALSTORAGE WITH 5s AUTO-SAVE               │
-│   VIEWPORT     : MULTI-PAGE STRUCTURED A4 RECTANGULAR BLOCK CONTAINERS       │
-│   EXPORTS      : NATIVE .TH (JSON) / RAW TEXT CLIPBOARD / PRINT-TO-PDF       │
-│                                                                              │
-└──────────────────────────────────────────────────────────────────────────────┘
+### 4. Kontakt
+* **Ogólne:** `contact@thorneinteractive.com`
+* **Prasa:** `press@thorneinteractive.com`
+* **Biznes:** `business@thorneinteractive.com`
 
 ---
 
-┌──────────────────────────────────────────────────────────────────────────────┐
-│                                                                              │
-│   ALL RIGHTS RESERVED © 2026 THORNE INTERACTIVE                              │
-│   UNAUTHORIZED DUPLICATION IS A VIOLATION OF APPLICABLE LAWS.                │
-│                                                                              │
-└──────────────────────────────────────────────────────────────────────────────┘
+## 🇬🇧 ENGLISH // PROJECT DOCUMENTATION
+
+### 1. About Studio & Philosophy
+Thorne Interactive is an independent auteur game studio based in Poland. We focus on crafting mature experiences where unforgiving mechanics intertwine tightly with heavy, existential narrative.
+
+### 2. Project GODKILLER
+**GODKILLER** is the flagship title — a dark open-world action game set in a bleak post-AI-war American state (**New State / NS**) inspired by NYC and Manhattan.
+
+* **🌍 World Structure (3 Districts):**
+  * **Rusty Lands:** Industrial scrapyard zone filled with machine wrecks and dust.
+  * **Lowtown:** Dreary residential blocks and concrete streets.
+  * **Vanguard:** Sleek corporate skyscrapers and Velen's HQ (Kael is barred here due to lacking a sector visa).
+
+* **Engine:** Unreal Engine 5 (C++ Core + Enhanced Input, Lumen & Nanite optimization)
+* **Platforms:** PC (Windows / Linux via Proton & Native)
+* **Distribution:** itch.io (zero publishing costs, absolute independence)
+* **Status:** Pre-Alpha / first gameplay systems in C++ (Q1)
+* **Target Release Window:** Winter 2028
+
+### 3. Development Roadmap
+* **Concept phase (foundations):** Initial New State setting, the human–AI conflict, Kael Cross, and the three districts. This is a story foundation to expand during production.
+* **Q4 (completed):** Start of C++ work and Unreal Engine 5 setup.
+* **Q1 (current phase):** Basic controls and Enhanced Input are complete; character movement and the first gameplay test class are in progress. The project remains at a very early stage; no completion percentage is published.
+* **Q2 (0%, planned):** Hit detection, collision, and basic combat prototypes.
+* **Q3 (0%, planned):** Initial location blockouts and material/lighting tests.
+* **Q4 (0%, planned):** Quest and narrative-choice systems.
+* **Q1 (0%, planned):** Basic NPC behavior and faction reactions.
+* **Q2 (0%, planned):** Audio, atmosphere, and content integration.
+* **Q3 (0%, planned):** Playable teaser, QA, and Linux tests if the prototype is ready.
+* **Q4 (0%, planned):** Release candidate, build stabilization, and product-page preparation.
+* **Winter 2028 (approximate target):** GODKILLER release on PC / itch.io. The date is not guaranteed; quality and stability remain the priority.
+
+### 4. Contact Channels
+* **General:** `contact@thorneinteractive.com`
+* **Press:** `press@thorneinteractive.com`
+* **Business:** `business@thorneinteractive.com`
+
+---
+
+## 🔒 LEGAL & COPYRIGHT // PRAWA AUTORSKIE
+
+© 2026 THORNE INTERACTIVE. WSZELKIE PRAWA ZASTRZEŻONE / ALL RIGHTS RESERVED.
+
+
+## Website page structure
+- `index.html` is the studio homepage.
+- `games.html` is the project catalog, split into two tabs: **GAMES** (GODKILLER) and **PROGRAMS** (THORNE TEXT EDITOR). Deep links `games.html#games` and `games.html#programs` open a tab directly. Styles live in `catalog.css`, tab logic in `catalog.js`.
+- `godkiller.html` is the expanded GODKILLER page with world details and the roadmap.
+
+THORNE TEXT EDITOR is a browser-based screenplay editor (auto-flowing pages, auto-save, `.th` export, print / PDF) hosted at <https://thorneinteractive.github.io/THORNE-EDITOR/>. The catalog card links to it; the interface preview on the card is an illustration, not a screenshot.
+
+The project is described as pre-alpha / early development. The roadmap distinguishes completed concept foundations, current early setup work, and planned future work. Winter 2028 remains an approximate target, not a confirmed release date. Studio elapsed time is a separate clock and does not represent game completion; a start date was not included with the supplied files, so the homepage shows that it is not provided until a verified date is set with `data-studio-start` on the body.
+
+Panel administratora działa lokalnie. Jego pliki (`admin.html`, `admin.js`, `admin.css`, `admin.local.js`) są wykluczone z Gita przez `.gitignore`. Ustaw własne hasło w `admin.local.js`, uruchom folder przez lokalny serwer HTTP i otwórz `admin.html`. W panelu edytujesz wszystkie etapy roadmapy w dwóch kolumnach: polskiej i angielskiej. Zapis od razu zmienia podgląd w tej przeglądarce.
+
+Aby opublikować zmiany, pobierz `roadmap-content.js`, podmień nim ten plik w projekcie i wypchnij zmianę do Gita. Panel zapisuje również zmiany lokalnie w przeglądarce. Strona jest statyczna, więc hasło w JavaScript nie jest ochroną serwerową — nie publikuj plików panelu ani `admin.local.js`. Plik `progress.js` pokazuje czas od podanej daty startu studia.

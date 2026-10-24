@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THORNE INTERACTIVE // GAMES / PROGRAMS</title>
+    <meta name="description" content="Catalog of Thorne Interactive: games and programs.">
+    <meta name="theme-color" content="#030303">
+    <link rel="icon" href="Obrazy/logo.jpg">
+    <script>document.documentElement.classList.add('js');</script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="catalog.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,400&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+</head>
+<body data-theme="dark" data-page="games" id="top">
+    <div class="page-transition" aria-hidden="true"><span></span></div>
+    <a href="#content" class="skip-link" data-i18n="skip_link">PRZEJDŹ DO TREŚCI</a>
+    <div class="scroll-progress-container"><div class="scroll-progress" id="scroll-progress"></div><div class="scroll-progress-text" id="scroll-progress-text">0%</div></div>
+    <canvas id="bg-canvas" aria-hidden="true"></canvas><div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+    <div class="scanlines-overlay"></div><div class="vignette-overlay"></div><div class="crt-noise"></div>
+    <header class="site-header" id="top-header"><div class="header-container">
+        <div class="logo-group"><a href="index.html" class="logo-link" aria-label="Thorne Interactive"><span class="logo-mark">TI</span></a><div class="studio-identifier"><span class="studio-name">THORNE INTERACTIVE</span><span class="sys-status"><span class="status-dot"></span> // SYS_ACTIVE_OK</span></div></div>
+        <nav class="desktop-nav"><a href="index.html" class="nav-item">[00. HOME]</a><a href="games.html" class="nav-item is-active" data-i18n="catalog_nav">[02. GAMES / PROGRAMS]</a></nav>
+        <div class="header-tools"><button id="language-toggle-btn" class="lang-switch-btn" type="button" aria-label="Toggle Language"><span class="lang-indicator">EN</span> / <span class="lang-muted">PL</span></button><button id="hamburger-btn" class="hamburger-menu" type="button" aria-label="Open Menu" aria-expanded="false" aria-controls="mobile-overlay"><span></span><span></span><span></span></button></div>
+    </div></header>
+    <div class="mobile-menu-overlay" id="mobile-overlay"><div class="mobile-menu-content"><nav class="mobile-nav-links"><a href="index.html" class="mobile-link" data-i18n="nav_home_plain">00. HOME</a><a href="games.html" class="mobile-link" data-i18n="catalog_nav">02. GAMES / PROGRAMS</a></nav></div></div>
+    <main id="content">
+        <section class="hero-section page-hero"><div class="hero-dark-mask"></div><span class="hud-corner tl"></span><span class="hud-corner tr"></span><span class="hud-corner bl"></span><span class="hud-corner br"></span><div class="hero-content-container"><span class="page-kicker" data-i18n="catalog_kicker">02 // PROJECT CATALOG</span><h1 class="main-title glitch-effect" data-text="GAMES / PROGRAMS" data-i18n="catalog_title">GAMES / PROGRAMS</h1><p class="hero-subtitle" data-i18n="catalog_intro">Games and tools by Thorne Interactive. Development status is stated plainly; planned features are not presented as completed work.</p>
+            <div class="catalog-strip" aria-label="Catalog summary"><span><b>01</b><span data-i18n="catalog_games">GAME</span></span><span><b>01</b><span data-i18n="catalog_programs">PROGRAM</span></span><span data-i18n="catalog_summary">STATUS // LABELLED PER PROJECT</span></div>
+        </div></section>
+
+        <section class="section-block"><div class="container" style="max-width:1300px;margin:0 auto;">
+            <div class="section-heading reveal"><span class="sec-number">01 //</span><h2 data-i18n="catalog_heading">CATALOG</h2></div>
+
+            <div class="catalog-switch reveal" role="tablist" aria-label="Catalog categories" data-i18n-aria="catalog_categories">
+                <button class="catalog-tab" id="tab-games" type="button" role="tab" data-catalog="games" aria-selected="true" aria-controls="panel-games"><i class="fa-solid fa-gamepad" aria-hidden="true"></i><span data-i18n="catalog_games">GAMES</span><span class="catalog-count">01</span></button>
+                <button class="catalog-tab" id="tab-programs" type="button" role="tab" data-catalog="programs" aria-selected="false" aria-controls="panel-programs" tabindex="-1"><i class="fa-solid fa-terminal" aria-hidden="true"></i><span data-i18n="catalog_programs">PROGRAMS</span><span class="catalog-count">01</span></button>
+            </div>
+
+            <!-- GAMES -->
+            <div class="catalog-panel" id="panel-games" role="tabpanel" aria-labelledby="tab-games" data-catalog-panel="games">
+                <article class="project-showcase-grid catalog-card">
+                    <div class="project-details">
+                        <span class="catalog-kind"><i class="fa-solid fa-gamepad" aria-hidden="true"></i><span data-i18n="catalog_game_kind"> GAME // OPEN-WORLD ACTION</span></span><br>
+                        <span class="status-badge" data-i18n="catalog_early">PRE-ALPHA // EARLY DEVELOPMENT</span>
+                        <h2 class="project-title" style="font-size:2.8rem;margin-bottom:15px;">GODKILLER</h2>
+                        <p class="text-body" data-i18n="catalog_game_desc">A planned open-world action game set in New State, a dystopian world shaped by the aftermath of war with AI. The project is at an early stage: concept foundations are outlined and work is beginning around Unreal Engine 5 and C++.</p>
+                        <dl class="project-meta">
+                            <div class="meta-row"><dt data-i18n="catalog_status">STATUS</dt><dd data-i18n="catalog_status_value">Early development; core gameplay systems are not yet complete.</dd></div>
+                            <div class="meta-row"><dt data-i18n="catalog_engine">ENGINE</dt><dd data-i18n="catalog_engine_value">Unreal Engine 5 // planned C++ core</dd></div>
+                            <div class="meta-row"><dt data-i18n="catalog_platform">PLATFORM</dt><dd data-i18n="catalog_platform_value">PC // target</dd></div>
+                            <div class="meta-row"><dt data-i18n="catalog_release">RELEASE</dt><dd data-i18n="catalog_release_value">Winter 2028 is an approximate target, not a confirmed date.</dd></div>
+                        </dl>
+                        <div class="catalog-actions"><a href="godkiller.html" class="btn-brutalist" data-i18n="catalog_open">OPEN PROJECT // GODKILLER</a></div>
+                    </div>
+                    <div class="project-media-box"><img src="Obrazy/baner.jpg" alt="GODKILLER project artwork" style="width:100%;height:380px;object-fit:cover;filter:grayscale(100%) brightness(.8) contrast(125%);"><div class="img-caption-tag">// PROJECT_REF: GODKILLER_01</div></div>
+                </article>
+            </div>
+
+            <!-- PROGRAMS -->
+            <div class="catalog-panel" id="panel-programs" role="tabpanel" aria-labelledby="tab-programs" data-catalog-panel="programs" hidden>
+                <article class="project-showcase-grid catalog-card">
+                    <div class="project-details">
+                        <span class="catalog-kind"><i class="fa-solid fa-terminal" aria-hidden="true"></i><span data-i18n="catalog_program_kind"> PROGRAM // WEB APP</span></span><br>
+                        <span class="status-badge" data-i18n="catalog_available">AVAILABLE ONLINE // IN BROWSER</span>
+                        <h2 class="project-title" style="font-size:2.8rem;margin-bottom:15px;">THORNE TEXT EDITOR</h2>
+                        <p class="text-body" data-i18n="editor_desc">A screenplay editor that runs in the browser. Pages flow and separate automatically, each line has a screenplay element type, and the work is saved as you type.</p>
+                        <div class="catalog-tags" aria-label="Features" data-i18n-aria="editor_features">
+                            <span>AUTO-FLOW PAGES</span><span>AUTO-SAVE</span><span>.TH EXPORT</span><span>PRINT / PDF</span><span>FOCUS MODE</span><span>DARK / LIGHT</span>
+                        </div>
+                        <dl class="project-meta">
+                            <div class="meta-row"><dt data-i18n="editor_elements">ELEMENTS</dt><dd>Scene, Action, Character, Parenthetical, Dialogue, Transition, Shot</dd></div>
+                            <div class="meta-row"><dt data-i18n="editor_stats">STATS</dt><dd>Words, characters, pages, scenes, estimated run time, average scene length</dd></div>
+                            <div class="meta-row"><dt data-i18n="editor_files">FILES</dt><dd>New, Save, Open, Export (.th), Print / PDF</dd></div>
+                            <div class="meta-row"><dt data-i18n="editor_platform">PLATFORM</dt><dd>Web // no installation</dd></div>
+                        </dl>
+                        <div class="catalog-actions">
+                            <a href="https://thorneinteractive.github.io/THORNE-EDITOR/" class="btn-brutalist" target="_blank" rel="noopener noreferrer"><span data-i18n="editor_launch">LAUNCH EDITOR</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-media-box">
+                        <div class="editor-mock" role="img" aria-label="Illustration of the Thorne Text Editor screenplay page">
+                            <div class="em-bar"><span class="em-logo">TE</span><span class="em-btn">NEW</span><span class="em-btn">SAVE</span><span class="em-btn">OPEN</span><span class="em-btn">PDF</span><span class="em-save">AUTO_SAVE: ACTIVE</span></div>
+                            <div class="em-types"><span class="on">SCENE</span><span>ACTION</span><span>CHARACTER</span><span>PAREN.</span><span>DIALOGUE</span><span>TRANSITION</span><span>SHOT</span></div>
+                            <div class="em-page" aria-hidden="true">
+                                <span class="em-pno">1.</span>
+                                <p class="em-scene">INT. EMPTY STUDIO - NIGHT</p>
+                                <p class="em-action">A single lamp hums over a desk. Rain taps the window.</p>
+                                <p class="em-char">Writer</p>
+                                <p class="em-paren">(quietly)</p>
+                                <p class="em-dial">One more page.</p>
+                                <p class="em-trans">Cut to:</p>
+                            </div>
+                            <div class="em-stats"><span>WORDS: <b>24</b></span><span>PAGES: <b>1</b></span><span>SCENES: <b>1</b></span><span>EST. RUN TIME: <b>00:30</b></span></div>
+                        </div>
+                        <div class="img-caption-tag">// UI_SKETCH: SCREENPLAY_PAGE</div>
+                    </div>
+                </article>
+            </div>
+
+            <p class="catalog-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span data-i18n="catalog_note">The editor preview above is an illustration of the interface, not a screenshot. Open the editor to see the real application.</span></p>
+        </div></section>
+    </main>
+    <footer class="site-footer"><div class="container footer-flex" style="max-width:1300px;margin:0 auto;"><p data-i18n="footer_rights">&copy; 2026 THORNE INTERACTIVE. ALL RIGHTS RESERVED.</p><nav class="footer-nav"><a href="index.html">HOME</a><a href="games.html#games">GAMES</a><a href="games.html#programs">PROGRAMS</a><a href="godkiller.html">GODKILLER</a></nav><p class="footer-sys-info" data-i18n="footer_catalog">// CATALOG // GAMES + PROGRAMS</p></div></footer>
+    <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to top">&uarr;</a>
+    <script src="roadmap-content.js" defer></script>
+    <script src="script.js" defer></script>
+    <script src="catalog.js" defer></script>
+</body>
+</html>

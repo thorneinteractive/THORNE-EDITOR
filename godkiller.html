@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THORNE INTERACTIVE // GODKILLER</title>
+    <meta name="description" content="GODKILLER — wczesny projekt Thorne Interactive. Poznaj świat New State i orientacyjny plan rozwoju.">
+    <meta name="theme-color" content="#030303">
+    <link rel="icon" href="Obrazy/logo.jpg">
+    <script>document.documentElement.classList.add('js');</script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,400&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+</head>
+<body data-theme="dark" data-page="godkiller" id="top">
+    <script>try{if(sessionStorage.getItem('thorne-page-transition')==='1'){document.body.classList.add('page-arrival');sessionStorage.removeItem('thorne-page-transition');}}catch{}</script>
+    <div class="page-transition" aria-hidden="true"><span></span></div>
+
+    <a href="#content" class="skip-link" data-i18n="skip_link">PRZEJDŹ DO TREŚCI</a>
+    <div class="scroll-progress-container">
+        <div class="scroll-progress" id="scroll-progress"></div>
+        <div class="scroll-progress-text" id="scroll-progress-text">0%</div>
+    </div>
+
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+    <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+    <div class="scanlines-overlay"></div>
+    <div class="vignette-overlay"></div>
+    <div class="crt-noise"></div>
+
+    <header class="site-header" id="top-header">
+        <div class="header-container">
+            <div class="logo-group">
+                <a href="index.html" class="logo-link" aria-label="Thorne Interactive"><span class="logo-mark">TI</span></a>
+                <div class="studio-identifier">
+                    <span class="studio-name">THORNE INTERACTIVE</span>
+                    <span class="sys-status"><span class="status-dot"></span> // SYS_ACTIVE_OK</span>
+                </div>
+            </div>
+
+            <nav class="desktop-nav">
+                <a href="index.html" class="nav-item" data-nav="home" data-i18n="nav_home">[00. HOME]</a>
+                <a href="games.html" class="nav-item" data-nav="games" data-i18n="nav_games">[02. GAMES]</a>
+                <a href="godkiller.html" class="nav-item is-active">[03. GODKILLER]</a>
+                <a href="#districts" class="nav-item" data-i18n="nav_sectors">[03. SECTORS]</a>
+                <a href="#roadmap" class="nav-item" data-i18n="nav_roadmap">[04. ROADMAP]</a>
+            </nav>
+
+            <div class="header-tools">
+                <button id="language-toggle-btn" class="lang-switch-btn" type="button" aria-label="Toggle Language">
+                    <span class="lang-indicator">EN</span> / <span class="lang-muted">PL</span>
+                </button>
+                <button id="hamburger-btn" class="hamburger-menu" type="button" aria-label="Open Menu" aria-expanded="false" aria-controls="mobile-overlay">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobile-overlay">
+        <div class="mobile-menu-content">
+            <nav class="mobile-nav-links">
+                <a href="index.html" class="mobile-link" data-i18n="nav_home">00. HOME</a>
+                <a href="games.html" class="mobile-link" data-i18n="nav_games">02. GAMES</a>
+                <a href="godkiller.html" class="mobile-link">03. GODKILLER</a>
+                <a href="#districts" class="mobile-link" data-i18n="nav_sectors">03. SECTORS</a>
+                <a href="#roadmap" class="mobile-link" data-i18n="nav_roadmap">04. ROADMAP</a>
+            </nav>
+        </div>
+    </div>
+
+    <main id="content">
+        <section class="hero-section page-hero">
+            <div class="hero-dark-mask"></div>
+            <span class="hud-corner tl"></span><span class="hud-corner tr"></span>
+            <span class="hud-corner bl"></span><span class="hud-corner br"></span>
+            <div class="hero-content-container">
+                <span class="page-kicker" data-i18n="games_kicker">PROJECT // 01</span>
+                <h1 class="main-title glitch-effect" data-text="GODKILLER">GODKILLER</h1>
+                <p class="hero-subtitle" data-i18n="games_sub">Wczesny projekt akcji w otwartym świecie. Poniżej opis koncepcji, świata oraz orientacyjny plan rozwoju; przedstawione mechaniki pozostają planami, dopóki nie zostaną wdrożone.</p>
+            </div>
+        </section>
+
+        <section id="project" class="section-block">
+            <div class="container" style="max-width: 1300px; margin: 0 auto;">
+                <div class="project-showcase-grid">
+                    <div class="project-details reveal">
+                        <span class="status-badge" data-i18n="badge_dev_status">PRE-ALPHA // WCZESNY ETAP: PIERWSZE SYSTEMY GAMEPLAYU W C++</span>
+                        <h2 class="project-title" style="font-size: 2.8rem; margin-bottom: 15px;" data-i18n="ns_title">STAN NEW STATE (NS)</h2>
+                        <p class="text-body" data-i18n="ns_desc">
+                            Świat po brutalnych wojnach z AI, wzorowany na strukturze Nowego Jorku i Manhattanu. Podzielony na trzy radykalnie odmienne strefy wpływów, w których mechanika przetrwania i walka o zasoby definiują każdy krok gracza.
+                        </p>
+
+                        <div class="feature-list-box">
+                            <div class="feat-item"><span class="feat-bullet">&gt;</span><span data-i18n="feat_1">CEL: bezwzględny system walki oparty na fizyce Unreal Engine 5 i C++; mechanika nie jest jeszcze gotowa.</span></div>
+                            <div class="feat-item"><span class="feat-bullet">&gt;</span><span data-i18n="feat_2">CEL: nieliniowa fabuła z trudnymi wyborami moralnymi.</span></div>
+                            <div class="feat-item"><span class="feat-bullet">&gt;</span><span data-i18n="feat_3">Planowana dystrybucja: itch.io; docelowo PC. Obsługa Linux/Proton nie została jeszcze potwierdzona testami.</span></div>
+                        </div>
+
+                        <dl class="project-meta">
+                            <div class="meta-row"><dt data-i18n="meta_engine">SILNIK</dt><dd>Unreal Engine 5 (C++ Core)</dd></div>
+                            <div class="meta-row"><dt data-i18n="meta_platform">PLATFORMA</dt><dd>PC // cel platformowy, szczegóły do potwierdzenia</dd></div>
+                            <div class="meta-row"><dt data-i18n="meta_setting">UNIWERSUM</dt><dd data-i18n="meta_setting_val">Stan New State (NS) // po wojnach z AI</dd></div>
+                        </dl>
+                    </div>
+
+                    <div class="project-media-box reveal" style="--d:.15s">
+                        <img src="Obrazy/baner.jpg" alt="Godkiller Preview" style="width: 100%; height: 380px; object-fit: cover; filter: brightness(0.85) contrast(125%);">
+                        <div class="img-caption-tag">// ASSET_REF: SECTOR_NS_01</div>
+                    </div>
+                </div>
+
+                <!-- DZIELNICE -->
+                <div id="districts" class="sub-block">
+                    <h3 class="sub-heading reveal" data-i18n="districts_heading">TRZY DZIELNICE NEW STATE (SEKTORY)</h3>
+                    <div class="reveal">
+                        <div class="district-tabs" role="tablist">
+                            <button class="district-tab active" type="button" role="tab" aria-selected="true" data-district="rusty">RUSTY LANDS</button>
+                            <button class="district-tab" type="button" role="tab" aria-selected="false" data-district="lowtown">LOWTOWN</button>
+                            <button class="district-tab" type="button" role="tab" aria-selected="false" data-district="vanguard">VANGUARD</button>
+                        </div>
+
+                        <div class="district-panel active" data-panel="rusty" role="tabpanel">
+                            <div class="district-info">
+                                <span class="district-tag" data-i18n="d_1_tag">ZŁOMOWISKO // STREFA PRZEMYSŁOWA</span>
+                                <h4 class="district-name">RUSTY LANDS</h4>
+                                <p class="district-desc" data-i18n="d_1_desc">Przemysłowe złomowisko pełne wraków maszyn z czasów wojny z AI. Rdza, pył i metal, który pamięta konflikt z maszynami.</p>
+                                <span class="district-palette" data-i18n="d_1_pal">PALETA // RDZA, PYŁ, STAL</span>
+                            </div>
+                            <div class="district-visual">
+                                <img src="Obrazy/baner.jpg" alt="Rusty Lands" style="width: 100%; height: 100%; object-fit: cover; filter: sepia(30%) brightness(0.8);">
+                                <span class="dv-label">// DISTRICT_01: RUSTY_LANDS</span>
+                            </div>
+                        </div>
+
+                        <div class="district-panel" data-panel="lowtown" role="tabpanel">
+                            <div class="district-info">
+                                <span class="district-tag" data-i18n="d_2_tag">SZARE OSIEDLA // WIELKA PŁYTA</span>
+                                <h4 class="district-name">LOWTOWN</h4>
+                                <p class="district-desc" data-i18n="d_2_desc">Szare bloki z wielkiej płyty, surowy beton i gęsta sieć chodników dla NPC. Dom Kaela Crossa i główny punkt oporu ludzkości.</p>
+                                <span class="district-palette" data-i18n="d_2_pal">PALETA // BETON, SZAROŚĆ, CIEŃ</span>
+                            </div>
+                            <div class="district-visual">
+                                <img src="Obrazy/logo.jpg" alt="Lowtown" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(70%) brightness(0.75);">
+                                <span class="dv-label">// DISTRICT_02: LOWTOWN</span>
+                            </div>
+                        </div>
+
+                        <div class="district-panel" data-panel="vanguard" role="tabpanel">
+                            <div class="district-info">
+                                <span class="district-tag" data-i18n="d_3_tag">SZKLANE WIEŻOWCE // SIEDZIBA VELENA</span>
+                                <h4 class="district-name">VANGUARD</h4>
+                                <p class="district-desc" data-i18n="d_3_desc">Sterylne, elitarne szklane wieżowce i siedziba Velena. Bez sektorowej wizy wstęp jest tu surowo zabroniony.</p>
+                                <span class="district-palette" data-i18n="d_3_pal">PALETA // SZKŁO, CHROM, BIEL</span>
+                            </div>
+                            <div class="district-visual">
+                                <img src="Obrazy/baner.jpg" alt="Vanguard" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.95) contrast(135%);">
+                                <span class="dv-label">// DISTRICT_03: VANGUARD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROADMAP: fazy opisane kwartałami; rok wyłącznie przy celu premiery -->
+                <div id="roadmap" class="sub-block">
+                    <div class="section-heading reveal" style="margin-bottom: 30px;">
+                        <span class="sec-number">05 //</span>
+                        <h2 data-i18n="roadmap_heading">HARMONOGRAM ROZWOJU (ROADMAP MASTER)</h2>
+                    </div>
+                    
+                    <div class="roadmap-legend reveal">
+                        <span><i class="fa-solid fa-square" style="color: var(--success-color);"></i> <span data-i18n="legend_done">UKOŃCZONE</span></span>
+                        <span><i class="fa-solid fa-square" style="color: var(--warning-color);"></i> <span data-i18n="legend_active">W TRAKCIE (AKTYWNA)</span></span>
+                        <span><i class="fa-solid fa-square" style="color: #444;"></i> <span data-i18n="legend_pending">ZAPLANOWANE</span></span>
+                    </div>
+
+                    <div class="roadmap-timeline-container reveal" id="timeline-container">
+                        <div class="timeline-vertical-line" id="timeline-line"></div>
+
+                        <!-- Faza 00: Koncept i fundamenty fabuły przygotowane przed rozpoczęciem kodowania -->
+                        <div class="roadmap-phase-card completed-phase tilt-sub" data-phase="0">
+                            <div class="phase-node completed-node"></div>
+                            <div class="phase-header-row">
+                                <span class="phase-code">FAZA 00 // ETAP KONCEPCYJNY</span>
+                                <span class="phase-badge completed-b" data-i18n="badge_done">UKOŃCZONE</span>
+                            </div>
+                            <h3 class="phase-title">Fundamenty GODKILLER: świat, lore i zarys fabuły</h3>
+                            <p class="phase-desc">Przed rozpoczęciem właściwego kodowania powstał wstępny koncept uniwersum New State, konfliktu człowiek–AI, postaci Kaela Crossa i trzech sektorów. To ukończony fundament koncepcyjny, a nie ukończona fabuła całej gry.</p>
+                            <div class="phase-tasks-list">
+                                <div class="task-item completed"><i class="fa-solid fa-check"></i> [OK] Koncept świata New State i konfliktu człowiek–AI</div>
+                                <div class="task-item completed"><i class="fa-solid fa-check"></i> [OK] Zarys Kaela Crossa i trzech sektorów</div>
+                            </div>
+                        </div>
+
+                        <!-- Faza 01: Q4 — ukończona -->
+                        <div class="roadmap-phase-card completed-phase tilt-sub" data-phase="1">
+                            <div class="phase-node completed-node"></div>
+                            <div class="phase-header-row">
+                                <span class="phase-code">FAZA 01 // Q4</span>
+                                <span class="phase-badge completed-b" data-i18n="badge_done">UKOŃCZONE</span>
+                            </div>
+                            <h3 class="phase-title">Q4: Start kodowania C++ i konfiguracja Unreal Engine 5</h3>
+                            <p class="phase-desc">Etap zakończony. Przygotowano środowisko UE5, rozpoczęto pracę w C++ i skompilowano pierwszą własną klasę. Zaawansowane mechaniki nie są jeszcze gotowe.</p>
+                            <div class="phase-tasks-list">
+                                <div class="task-item completed"><i class="fa-solid fa-check"></i> [OK] Rozpoczęcie pracy z C++ w projekcie Unreal Engine 5</div>
+                                <div class="task-item completed"><i class="fa-solid fa-check"></i> [OK] Przygotowanie pierwszej własnej klasy C++ i kompilacji w UE5</div>
+                            </div>
+                        </div>
+
+                        <!-- Faza 02: Q1 — aktualny etap -->
+                        <div class="roadmap-phase-card active-phase tilt-sub" data-phase="2">
+                            <div class="phase-node active-node"></div>
+                            <div class="phase-header-row">
+                                <span class="phase-code">FAZA 02 // Q1</span>
+                                <span class="phase-badge active-b" data-i18n="badge_active">AKTYWNY (TU JESTEŚMY)</span>
+                            </div>
+                            <h3 class="phase-title">Q1: Fundamenty gameplayu i pierwsze systemy C++</h3>
+                            <p class="phase-desc">Aktualny etap projektu. Podstawowe sterowanie i Enhanced Input są ukończone; w toku są ruch postaci i pierwsza testowa klasa rozgrywki. To nadal etap bazowy, bez obietnicy gotowej, rozbudowanej mechaniki.</p>
+                            <div class="phase-tasks-list">
+                                <div class="task-item completed"><i class="fa-solid fa-check"></i> [OK] Podstawowy system sterowania i Enhanced Input</div>
+                                <div class="task-item in-progress"><i class="fa-solid fa-spinner fa-spin"></i> [W TRAKCIE] Ruch postaci i pierwsza testowa klasa gameplayowa</div>
+                            </div>
+                        </div>
+
+                        <!-- Faza 03: Q2 — planowana -->
+                        <div class="roadmap-phase-card tilt-sub" data-phase="3">
+                            <div class="phase-node"></div>
+                            <div class="phase-header-row">
+                                <span class="phase-code">FAZA 03 // Q2</span>
+                                <span class="phase-badge pending-b" data-i18n="badge_pending">ZAPLANOWANY</span>
+                            </div>
+                            <h3 class="phase-title">Q2: Prototyp systemu walki i kolizji</h3>
+                            <p class="phase-desc">Planowany etap podstawowego systemu walki, wykrywania trafień i kolizji. Zakres zostanie dopracowany dopiero po uruchomieniu i sprawdzeniu podstaw projektu.</p>
+                            <div class="phase-tasks-list">
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Prototyp wykrywania trafień i kolizji w C++</div>
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Pierwszy prosty prototyp walki</div>
+                            </div>
+                        </div>
+
+                        <!-- Faza 04: Q3 -->
+                        <div class="roadmap-phase-card tilt-sub" data-phase="4">
+                            <div class="phase-node"></div>
+                            <div class="phase-header-row">
+                                <span class="phase-code">FAZA 04 // Q3</span>
+                                <span class="phase-badge pending-b" data-i18n="badge_pending">ZAPLANOWANY</span>
+                            </div>
+                            <h3 class="phase-title">Q3: Pierwszy prototyp świata i blokouty dzielnic</h3>
+                            <p class="phase-desc">Planowane przygotowanie prostych blokoutów i pierwszych testów przestrzeni dla Rusty Lands, Lowtown oraz Vanguard. To wstępne prototypy, nie gotowe lokacje.</p>
+                            <div class="phase-tasks-list">
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Pierwsze blokouty kluczowych lokacji</div>
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Wstępne testy materiałów i oświetlenia</div>
+                            </div>
+                        </div>
+
+                        <!-- Faza 05: Q4 -->
+                        <div class="roadmap-phase-card tilt-sub" data-phase="5">
+                            <div class="phase-node"></div>
+                            <div class="phase-header-row">
+                                <span class="phase-code">FAZA 05 // Q4</span>
+                                <span class="phase-badge pending-b" data-i18n="badge_pending">ZAPLANOWANY</span>
+                            </div>
+                            <h3 class="phase-title">Q4: System zadań i wyborów fabularnych</h3>
+                            <p class="phase-desc">Wstępne projektowanie i prototypowanie systemu zadań oraz konsekwencji wyborów fabularnych. Zakres będzie zależał od postępu podstawowych systemów gry.</p>
+                            <div class="phase-tasks-list">
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Projekt struktury zadań i stanów fabularnych</div>
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Prototyp prostych konsekwencji wyborów</div>
+                            </div>
+                        </div>
+
+                        <!-- Faza 06: Q1 -->
+                        <div class="roadmap-phase-card tilt-sub" data-phase="6">
+                            <div class="phase-node"></div>
+                            <div class="phase-header-row">
+                                <span class="phase-code">FAZA 06 // Q1</span>
+                                <span class="phase-badge pending-b" data-i18n="badge_pending">ZAPLANOWANY</span>
+                            </div>
+                            <h3 class="phase-title">Q1: AI NPC i zachowania frakcji</h3>
+                            <p class="phase-desc">Planowane podstawowe zachowania postaci niezależnych i pierwsze reakcje wrogich frakcji. To etap zależny od wcześniejszego działającego prototypu rozgrywki.</p>
+                            <div class="phase-tasks-list">
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Podstawowe zachowania NPC w C++</div>
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Pierwsze reakcje frakcji na gracza</div>
+                            </div>
+                        </div>
+
+                        <!-- Faza 07: Q2 -->
+                        <div class="roadmap-phase-card tilt-sub" data-phase="7">
+                            <div class="phase-node"></div>
+                            <div class="phase-header-row">
+                                <span class="phase-code">FAZA 07 // Q2</span>
+                                <span class="phase-badge pending-b" data-i18n="badge_pending">ZAPLANOWANY</span>
+                            </div>
+                            <h3 class="phase-title">Q2: Audio, klimat i integracja zawartości</h3>
+                            <p class="phase-desc">Planowana integracja podstawowych efektów dźwiękowych, ambientu i elementów klimatu świata. Kolejność prac może się zmienić wraz z postępem prototypu.</p>
+                            <div class="phase-tasks-list">
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Podstawowe efekty dźwiękowe i ambient</div>
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Integracja dźwięku z prototypem rozgrywki</div>
+                            </div>
+                        </div>
+
+                        <!-- Faza 08: Q3 -->
+                        <div class="roadmap-phase-card tilt-sub" data-phase="8">
+                            <div class="phase-node"></div>
+                            <div class="phase-header-row">
+                                <span class="phase-code">FAZA 08 // Q3</span>
+                                <span class="phase-badge pending-b" data-i18n="badge_pending">ZAPLANOWANY</span>
+                            </div>
+                            <h3 class="phase-title">Q3: Playable Teaser, QA i testy Linux</h3>
+                            <p class="phase-desc">Cel planowany: przygotowanie ograniczonego, grywalnego teasera i pierwsza szersza runda testów. Publikacja zależy od tego, czy prototyp osiągnie wystarczającą stabilność i zakres.</p>
+                            <div class="phase-tasks-list">
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Ocena gotowości prototypu do teasera</div>
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Testy stabilności Windows i Linux/Proton</div>
+                            </div>
+                        </div>
+
+                        <!-- Faza 09: Q4 -->
+                        <div class="roadmap-phase-card tilt-sub" data-phase="9">
+                            <div class="phase-node"></div>
+                            <div class="phase-header-row">
+                                <span class="phase-code">FAZA 09 // Q4</span>
+                                <span class="phase-badge pending-b" data-i18n="badge_pending">ZAPLANOWANY</span>
+                            </div>
+                            <h3 class="phase-title">Q4: Kandydat do wydania i stabilizacja</h3>
+                            <p class="phase-desc">Jeśli zakres gry i tempo produkcji na to pozwolą, etap obejmie stabilizację builda, poprawki krytycznych błędów oraz przygotowanie strony produktu. Harmonogram jest orientacyjny.</p>
+                            <div class="phase-tasks-list">
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Stabilizacja builda i poprawki krytycznych błędów</div>
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Przygotowanie strony produktu na itch.io</div>
+                            </div>
+                        </div>
+
+                        <!-- Faza 10: Zima 2028 -->
+                        <div class="roadmap-phase-card premiere-card tilt-sub" data-phase="10">
+                            <div class="phase-node premiere-node"></div>
+                            <div class="phase-header-row">
+                                <span class="phase-code">FAZA 10 // ZIMA 2028</span>
+                                <span class="phase-badge premiere-b" data-i18n="badge_premiere">CEL: PREMIERA</span>
+                            </div>
+                            <h3 class="phase-title">PREMIERA GODKILLER (PC / itch.io)</h3>
+                            <p class="phase-desc">Orientacyjny cel wydawniczy, zależny od rzeczywistego postępu produkcji, zakresu gry i testów. Termin nie jest gwarantowany; jakość oraz stabilność będą ważniejsze niż sztywna data.</p>
+                            <div class="phase-tasks-list">
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Publikacja wersji 1.0 na itch.io</div>
+                                <div class="task-item"><span class="t-box">&gt;</span> [ ] Start wsparcia społecznościowego i modyfikacji</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div style="margin-top: 80px; text-align: center;" class="reveal">
+                    <a href="games.html" class="btn-brutalist-outline" style="font-size: 0.9rem; padding: 16px 36px;" data-i18n="back_home">&larr; POWRÓT DO KATALOGU // GAMES</a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-flex" style="max-width: 1300px; margin: 0 auto;">
+            <p data-i18n="footer_rights">&copy; 2026 THORNE INTERACTIVE. WSZELKIE PRAWA ZASTRZEŻONE.</p>
+            <nav class="footer-nav">
+                <a href="index.html" data-i18n="nav_home">HOME</a>
+                <a href="games.html" data-i18n="nav_games">GAMES</a>
+            </nav>
+            <p class="footer-sys-info">// PROJECT: GODKILLER // UE5_C++</p>
+        </div>
+    </footer>
+
+    <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to top">&uarr;</a>
+    <script src="roadmap-content.js" defer></script>
+    <script src="script.js" defer></script>
+</body>
+</html>
+
+
+
